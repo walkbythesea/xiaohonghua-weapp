@@ -1,0 +1,12 @@
+<view class="overlay {{show ? 'show' : ''}}" catchtouchmove="noop">
+  <view class="praise-card" wx:if="{{show}}">
+    <view class="praise-bar"></view>
+    <view class="praise-logo-wrap">
+      <image src="/images/logo.png" class="praise-logo" mode="aspectFill"></image>
+    </view>
+    <text class="praise-meta">{{meta}}</text>
+    <text class="praise-ttl">{{title}}</text>
+    <text class="praise-body {{loading ? 'loading' : ''}}">{{body}}</text>
+    <view class="praise-close" bindtap="onClose">继续加油 💪</view>
+  </view>
+</view>

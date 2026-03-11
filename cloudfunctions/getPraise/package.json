@@ -1,0 +1,9 @@
+{
+  "name": "getPraise",
+  "version": "1.0.0",
+  "description": "调用 Anthropic API 生成夸夸文案",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

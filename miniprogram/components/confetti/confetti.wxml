@@ -1,0 +1,8 @@
+<view class="cf-stage" wx:if="{{active}}">
+  <view
+    class="cp"
+    wx:for="{{particles}}"
+    wx:key="index"
+    style="left:{{item.left}};width:{{item.size}};height:{{item.size}};background:{{item.color}};border-radius:{{item.radius}};animation-duration:{{item.duration}};animation-delay:{{item.delay}}"
+  ></view>
+</view>

@@ -1,0 +1,37 @@
+.page {
+  padding: 44rpx 32rpx;
+}
+
+.field {
+  margin-bottom: 36rpx;
+}
+
+/* ── Date picker trigger ── */
+.dp-trigger {
+  width: 100%;
+  background: #F7F0E8;
+  border: 3rpx solid transparent;
+  border-radius: 24rpx;
+  padding: 26rpx 28rpx;
+  font-size: 28rpx;
+  font-weight: 300;
+  color: #1E1210;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.dp-trigger:active {
+  border-color: #D94F3D;
+  background: #FFFFFF;
+}
+
+.dp-trigger-text {
+  flex: 1;
+}
+
+.dp-trigger-arrow {
+  color: #C8B0A4;
+  font-size: 24rpx;
+}

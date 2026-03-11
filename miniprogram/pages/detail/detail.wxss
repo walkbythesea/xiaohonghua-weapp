@@ -1,0 +1,218 @@
+.page {
+  padding: 44rpx 32rpx 176rpx;
+  padding-bottom: calc(176rpx + env(safe-area-inset-bottom));
+}
+
+/* ── Hero card ── */
+.hero {
+  background: linear-gradient(135deg, #D94F3D 0%, #E8784A 55%, #E8A84A 100%);
+  border-radius: 44rpx;
+  padding: 44rpx 40rpx 40rpx;
+  color: white;
+  margin-bottom: 44rpx;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20rpx 72rpx rgba(160, 90, 70, 0.16);
+}
+
+.hero-deco {
+  position: absolute;
+  right: -8rpx;
+  bottom: -28rpx;
+  width: 220rpx;
+  height: 220rpx;
+  opacity: 0.18;
+}
+
+.hero-flower {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-name {
+  font-size: 44rpx;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 28rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-days-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-num {
+  font-size: 80rpx;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.hero-unit {
+  font-size: 28rpx;
+  font-weight: 300;
+  opacity: 0.82;
+}
+
+.hero-sub {
+  font-size: 22rpx;
+  font-weight: 300;
+  opacity: 0.60;
+  margin-left: 8rpx;
+}
+
+.hero-cnt {
+  margin-top: 20rpx;
+  font-size: 22rpx;
+  font-weight: 300;
+  opacity: 0.65;
+  letter-spacing: 0.6rpx;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Timeline ── */
+.tl {
+  position: relative;
+  padding-left: 48rpx;
+}
+
+.tl-line {
+  position: absolute;
+  left: 14rpx;
+  top: 12rpx;
+  bottom: 0;
+  width: 3rpx;
+  background: linear-gradient(to bottom, rgba(217, 79, 61, 0.4), rgba(217, 79, 61, 0.05));
+}
+
+.tl-item {
+  position: relative;
+  margin-bottom: 32rpx;
+  animation: slideUp 0.3s ease both;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tl-dot {
+  position: absolute;
+  left: -36rpx;
+  top: 26rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #D94F3D, #E8784A);
+  border: 4rpx solid #F7F0E8;
+  box-shadow: 0 0 0 4rpx rgba(217, 79, 61, 0.18);
+}
+
+.tl-card {
+  background: #FFFCF8;
+  border-radius: 32rpx;
+  padding: 28rpx 30rpx;
+  border: 1px solid rgba(180, 130, 110, 0.13);
+  box-shadow: 0 2rpx 16rpx rgba(160, 90, 70, 0.07);
+}
+
+.tl-date {
+  font-size: 20rpx;
+  font-weight: 400;
+  color: #C8B0A4;
+  margin-bottom: 14rpx;
+  letter-spacing: 0.6rpx;
+  display: block;
+}
+
+.tl-img {
+  width: 100%;
+  border-radius: 18rpx;
+  margin-bottom: 18rpx;
+  max-height: 400rpx;
+}
+
+.tl-txt {
+  font-size: 28rpx;
+  font-weight: 400;
+  color: #1E1210;
+  line-height: 1.7;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.tl-praise {
+  display: flex;
+  gap: 16rpx;
+  align-items: flex-start;
+  background: #F7F0E8;
+  border-radius: 18rpx;
+  padding: 18rpx 22rpx;
+  border-left: 5rpx solid #D94F3D;
+}
+
+.tl-praise-ico {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 2rpx;
+}
+
+.tl-praise-txt {
+  font-size: 24rpx;
+  font-weight: 300;
+  color: #D94F3D;
+  line-height: 1.75;
+}
+
+.tl-praise-ing {
+  color: #C8B0A4;
+  font-style: italic;
+}
+
+/* ── Empty timeline ── */
+.tl-empty {
+  text-align: center;
+  padding: 72rpx 32rpx;
+  font-size: 26rpx;
+  font-weight: 300;
+  color: #C8B0A4;
+  line-height: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── FAB ── */
+.fab {
+  position: fixed;
+  bottom: calc(56rpx + env(safe-area-inset-bottom));
+  right: 40rpx;
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #D94F3D 0%, #E8784A 55%, #E8A84A 100%);
+  box-shadow: 0 8rpx 36rpx rgba(217, 79, 61, 0.38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44rpx;
+  color: white;
+  z-index: 60;
+}
+
+.fab:active {
+  opacity: 0.85;
+  transform: scale(0.95);
+}

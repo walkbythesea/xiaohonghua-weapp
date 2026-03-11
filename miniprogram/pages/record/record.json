@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "记录进展",
+  "usingComponents": {
+    "praise-modal": "/components/praise-modal/praise-modal",
+    "confetti": "/components/confetti/confetti"
+  }
+}

@@ -1,0 +1,28 @@
+<view class="page">
+  <view class="fcard">
+    <view class="field">
+      <text class="flabel">目标</text>
+      <input
+        class="finput {{nameFocus ? 'finput-focus' : ''}}"
+        placeholder="比如：学会游泳"
+        placeholder-class="finput-placeholder"
+        maxlength="30"
+        bindinput="onNameInput"
+        bindfocus="onNameFocus"
+        bindblur="onNameBlur"
+      />
+    </view>
+
+    <view class="field">
+      <text class="flabel">开始日期</text>
+      <picker mode="date" value="{{date}}" start="2020-01-01" end="2030-12-31" bindchange="onDateChange">
+        <view class="dp-trigger">
+          <text class="dp-trigger-text">{{dateLabel}}</text>
+          <text class="dp-trigger-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="btn-p w100" bindtap="createGoal">种下这个目标</view>
+  </view>
+</view>

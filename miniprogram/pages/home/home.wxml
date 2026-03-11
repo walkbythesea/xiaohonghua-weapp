@@ -1,0 +1,51 @@
+<view class="page">
+  <!-- Branding -->
+  <view class="brand">
+    <image class="brand-logo" src="/images/logo.png" mode="aspectFill"></image>
+    <view class="brand-text">
+      <text class="brand-name">小红花目标簿</text>
+      <text class="brand-sub">每一步，都值得一朵小红花</text>
+    </view>
+  </view>
+
+  <text class="sec-label">我的目标</text>
+
+  <!-- Goal list -->
+  <block wx:if="{{goals.length > 0}}">
+    <view class="gcard" wx:for="{{goals}}" wx:key="id"
+      bindtap="openDetail" data-id="{{item.id}}">
+      <view class="gcard-stripe"></view>
+      <view class="gcard-body">
+        <view class="ms-badge" wx:if="{{item.isMilestone}}">
+          <text>🏅 第{{item.days}}天里程碑</text>
+        </view>
+        <view class="gcard-row1">
+          <text class="gcard-name">{{item.name}}</text>
+          <view class="days-pill">第 {{item.days}} 天</view>
+        </view>
+        <view class="gcard-latest" wx:if="{{item.latestContent}}">
+          <text>{{item.latestContent}}</text>
+        </view>
+        <view class="gcard-foot">
+          <text class="gcard-cnt">已记录 <text class="cnt-em">{{item.recordCount}}</text> 次</text>
+          <view class="btn-rec" catchtap="quickRecord" data-id="{{item.id}}">记录进展</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="tc mt18" wx:if="{{goals.length < 3}}">
+      <view class="btn-ghost" bindtap="goCreate">＋ 添加新目标</view>
+    </view>
+  </block>
+
+  <!-- Empty state -->
+  <view class="empty" wx:else>
+    <view class="empty-ico-wrap">
+      <image class="empty-ico" src="/images/flower.png" mode="aspectFit"></image>
+    </view>
+    <text class="empty-t">种下你的第一个目标</text>
+    <text class="empty-d">每一步
+都值得一朵小红花</text>
+    <view class="btn-p" bindtap="goCreate">＋ 创建目标</view>
+  </view>
+</view>

@@ -1,0 +1,45 @@
+<view class="page">
+  <view class="fcard">
+    <view class="field">
+      <text class="flabel">今天的进展</text>
+      <textarea
+        class="finput textarea {{contentFocus ? 'finput-focus' : ''}}"
+        placeholder="一句话也可以"
+        placeholder-class="finput-placeholder"
+        bindinput="onContentInput"
+        bindfocus="onContentFocus"
+        bindblur="onContentBlur"
+        auto-height="{{false}}"
+        fixed="{{true}}"
+      />
+    </view>
+
+    <view class="field">
+      <text class="flabel">图片（可选）</text>
+      <block wx:if="{{imgPath}}">
+        <view class="img-wrap">
+          <image class="img-prev" src="{{imgPath}}" mode="widthFix"></image>
+          <view class="img-remove" bindtap="removeImage">✕</view>
+        </view>
+      </block>
+      <view class="upload-zone" wx:else bindtap="chooseImage">
+        <text class="upload-hint">点击上传图片</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="btn-p w100 {{submitting ? 'disabled' : ''}}" bindtap="submit">提交</view>
+</view>
+
+<!-- Praise modal -->
+<praise-modal
+  show="{{showPraise}}"
+  meta="{{praiseMeta}}"
+  title="{{praiseTitle}}"
+  body="{{praiseBody}}"
+  loading="{{praiseLoading}}"
+  bind:close="closePraise"
+/>
+
+<!-- Confetti -->
+<confetti show="{{showConfetti}}" bind:done="onConfettiDone" />

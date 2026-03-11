@@ -1,0 +1,219 @@
+.page {
+  padding: 44rpx 32rpx 176rpx;
+  padding-bottom: calc(176rpx + env(safe-area-inset-bottom));
+}
+
+/* ── Brand header ── */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.brand-logo {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 20rpx;
+  flex-shrink: 0;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #D94F3D;
+  background: linear-gradient(135deg, #D94F3D 0%, #E8784A 55%, #E8A84A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1rpx;
+}
+
+.brand-sub {
+  font-size: 20rpx;
+  font-weight: 300;
+  color: #A8897A;
+  letter-spacing: 0.6rpx;
+  margin-top: 2rpx;
+}
+
+/* ── Goal card ── */
+.gcard {
+  background: #FFFCF8;
+  border-radius: 44rpx;
+  border: 1px solid rgba(180, 130, 110, 0.13);
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 16rpx rgba(160, 90, 70, 0.07);
+  overflow: hidden;
+}
+
+.gcard:active {
+  opacity: 0.92;
+  transform: scale(0.985);
+}
+
+.gcard-stripe {
+  height: 6rpx;
+  background: linear-gradient(135deg, #D94F3D 0%, #E8784A 55%, #E8A84A 100%);
+}
+
+.gcard-body {
+  padding: 32rpx 36rpx 28rpx;
+}
+
+.gcard-row1 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.gcard-name {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #1E1210;
+  line-height: 1.35;
+  flex: 1;
+}
+
+.days-pill {
+  background: linear-gradient(135deg, #D94F3D 0%, #E8784A 55%, #E8A84A 100%);
+  color: white;
+  border-radius: 40rpx;
+  padding: 8rpx 22rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.4rpx;
+}
+
+.ms-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8rpx;
+  background: linear-gradient(135deg, #E8C04A, #E8A84A);
+  color: white;
+  border-radius: 40rpx;
+  padding: 6rpx 18rpx;
+  font-size: 20rpx;
+  font-weight: 600;
+  margin-bottom: 20rpx;
+  letter-spacing: 0.6rpx;
+}
+
+.gcard-latest {
+  font-size: 26rpx;
+  font-weight: 300;
+  color: #5C3A30;
+  line-height: 1.65;
+  background: #F7F0E8;
+  border-radius: 20rpx;
+  padding: 18rpx 24rpx;
+  margin-bottom: 26rpx;
+  border-left: 4rpx solid rgba(217, 79, 61, 0.25);
+}
+
+.gcard-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gcard-cnt {
+  font-size: 22rpx;
+  font-weight: 300;
+  color: #C8B0A4;
+}
+
+.cnt-em {
+  color: #D94F3D;
+  font-weight: 500;
+}
+
+.btn-rec {
+  background: linear-gradient(135deg, #D94F3D 0%, #E8784A 55%, #E8A84A 100%);
+  color: white;
+  border-radius: 40rpx;
+  padding: 14rpx 32rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  letter-spacing: 0.6rpx;
+  text-align: center;
+}
+
+.btn-rec:active {
+  opacity: 0.85;
+}
+
+/* ── Empty state ── */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 128rpx 48rpx 80rpx;
+  text-align: center;
+}
+
+.empty-ico-wrap {
+  width: 176rpx;
+  height: 176rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 48rpx;
+  animation: floatAnim 3.5s ease-in-out infinite;
+}
+
+@keyframes floatAnim {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14rpx); }
+}
+
+.empty-ico {
+  width: 144rpx;
+  height: 144rpx;
+}
+
+.empty-t {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #1E1210;
+  margin-bottom: 16rpx;
+}
+
+.empty-d {
+  font-size: 26rpx;
+  font-weight: 300;
+  color: #A8897A;
+  line-height: 2;
+  margin-bottom: 56rpx;
+}
+
+/* ── FAB ── */
+.fab {
+  position: fixed;
+  bottom: calc(56rpx + env(safe-area-inset-bottom));
+  right: 40rpx;
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #D94F3D 0%, #E8784A 55%, #E8A84A 100%);
+  box-shadow: 0 8rpx 36rpx rgba(217, 79, 61, 0.38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44rpx;
+  color: white;
+  z-index: 60;
+}
+
+.fab:active {
+  opacity: 0.85;
+  transform: scale(0.95);
+}

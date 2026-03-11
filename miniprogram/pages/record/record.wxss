@@ -1,0 +1,70 @@
+.page {
+  padding: 44rpx 32rpx;
+}
+
+.field {
+  margin-bottom: 32rpx;
+}
+
+.textarea {
+  height: 216rpx;
+  line-height: 1.75;
+}
+
+/* ── Upload zone ── */
+.upload-zone {
+  border: 3rpx dashed rgba(180, 130, 110, 0.30);
+  border-radius: 24rpx;
+  padding: 24rpx 32rpx;
+  text-align: center;
+  background: #F7F0E8;
+}
+
+.upload-zone:active {
+  border-color: #D94F3D;
+  background: rgba(217, 79, 61, 0.03);
+}
+
+.upload-hint {
+  font-size: 24rpx;
+  font-weight: 300;
+  color: #C8B0A4;
+}
+
+/* ── Image preview ── */
+.img-wrap {
+  position: relative;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.img-prev {
+  width: 100%;
+  border-radius: 20rpx;
+  max-height: 400rpx;
+}
+
+.img-remove {
+  position: absolute;
+  top: 16rpx;
+  right: 16rpx;
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: rgba(30, 18, 16, 0.60);
+  color: white;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-remove:active {
+  background: rgba(30, 18, 16, 0.80);
+}
+
+/* ── Disabled button ── */
+.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}

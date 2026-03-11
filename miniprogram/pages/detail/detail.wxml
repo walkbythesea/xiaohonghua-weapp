@@ -1,0 +1,44 @@
+<view class="page">
+  <!-- Hero -->
+  <view class="hero">
+    <view class="hero-deco">
+      <image src="/images/flower.png" class="hero-flower" mode="aspectFit"></image>
+    </view>
+    <text class="hero-name">{{goalName}}</text>
+    <view class="hero-days-row">
+      <text class="hero-num">{{days}}</text>
+      <text class="hero-unit">天</text>
+      <text class="hero-sub">· 始于 {{startDate}}</text>
+    </view>
+    <text class="hero-cnt">共记录 {{recordCount}} 次进展</text>
+  </view>
+
+  <text class="sec-label">进展时间轴</text>
+
+  <!-- Timeline -->
+  <view class="tl" wx:if="{{hasRecords}}">
+    <view class="tl-line"></view>
+    <view class="tl-item" wx:for="{{records}}" wx:key="id"
+      style="animation-delay: {{item.animDelay}}">
+      <view class="tl-dot"></view>
+      <view class="tl-card">
+        <text class="tl-date">{{item.dateStr}}</text>
+        <image class="tl-img" wx:if="{{item.hasImg}}" src="{{item.img}}" mode="widthFix"></image>
+        <text class="tl-txt">{{item.content}}</text>
+        <view class="tl-praise">
+          <image class="tl-praise-ico" src="/images/flower.png" mode="aspectFit"></image>
+          <text class="tl-praise-txt {{item.hasPraise ? '' : 'tl-praise-ing'}}">{{item.hasPraise ? item.praise : '夸夸生成中…'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Empty timeline -->
+  <view class="tl-empty" wx:else>
+    <text>还没有进展记录</text>
+    <text>点右下角按钮，开始第一步</text>
+  </view>
+</view>
+
+<!-- FAB -->
+<view class="fab" bindtap="goRecord">✍️</view>
