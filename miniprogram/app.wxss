@@ -1,3 +1,8 @@
+@import "styles/tokens.wxss";
+@import "styles/components.wxss";
+
+/* 你原有的 app.wxss 内容保持不动... */
+
 /* ── Global Styles for 小红花目标簿 ── */
 
 page {

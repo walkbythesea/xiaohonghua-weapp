@@ -1,0 +1,335 @@
+/**
+ * 小红花目标簿 · Component Classes
+ * ================================
+ * 通用 .ds-* 组件类。所有页面优先复用这里的类,
+ * 而不是在 page 级 wxss 里重新写样式。
+ *
+ * 任何新增类必须只引用 var(--*) token,禁止 hardcode。
+ */
+
+/* ============================================
+ * Card / 卡片
+ * ============================================ */
+
+.ds-card {
+  background: var(--bg-card);
+  border-radius: var(--r-md);
+  padding: var(--sp-5);
+  box-shadow: var(--shadow-card);
+  border: 1rpx solid var(--line);
+  transition: all var(--duration-normal) var(--easing);
+  /* 卡片整体作为可点击区域时的视觉反馈 */
+}
+
+.ds-card:active {
+  transform: scale(0.985);
+  box-shadow: var(--shadow-card-pressed);
+}
+
+/* 主卡片 - 一屏只允许 0 或 1 张 */
+.ds-card-primary {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFFAF3 100%);
+}
+
+/* 半透明卡片 - 用于次要功能区(如提醒栏) */
+.ds-card-soft {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16rpx);
+  -webkit-backdrop-filter: blur(16rpx);
+  border-radius: var(--r-md);
+  padding: var(--sp-4);
+  border: 1rpx solid var(--line);
+}
+
+/* 空状态卡片 - 数据极少时的简化版,避免太空 */
+.ds-card-empty {
+  background: var(--bg-card);
+  border-radius: var(--r-md);
+  padding: var(--sp-5);
+  box-shadow: var(--shadow-sm);
+  border: 1rpx dashed var(--line-strong);
+}
+
+/* ============================================
+ * Badge / 徽章
+ * ============================================ */
+
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  background: var(--bg-card-soft);
+  padding: 10rpx 22rpx;
+  border-radius: var(--r-pill);
+  border: 1rpx solid var(--line);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Hot 徽章 - 一屏最多 1 个,搭配火苗图标 */
+.ds-badge-hot {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-color: rgba(232, 99, 42, 0.15);
+  font-weight: var(--fw-semibold);
+}
+
+/* ============================================
+ * Button / 按钮
+ * ============================================
+ * 一屏只允许 1 个 .ds-btn-primary
+ */
+
+/* Primary - 实心 accent 主按钮 */
+.ds-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  background: var(--accent);
+  color: #FFFFFF;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: var(--r-pill);
+  box-shadow: var(--shadow-accent);
+  border: none;
+  transition: all var(--duration-normal) var(--easing);
+  /* 重置小程序 button 默认样式 */
+  line-height: 1.4;
+}
+
+.ds-btn-primary::after {
+  border: none; /* 去掉小程序原生 button 的边框 */
+}
+
+.ds-btn-primary:active {
+  background: var(--accent-deep);
+  transform: scale(0.98);
+}
+
+/* Secondary - 透明背景描边按钮 */
+.ds-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  background: transparent;
+  color: var(--accent);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: var(--r-pill);
+  border: 1rpx solid var(--accent);
+  line-height: 1.4;
+}
+
+.ds-btn-secondary::after {
+  border: none;
+}
+
+/* Tertiary - 文字按钮(卡片内"打卡 →"这种) */
+.ds-btn-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  background: transparent;
+  color: var(--accent);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  padding: 0;
+  border: none;
+  line-height: 1;
+}
+
+.ds-btn-text::after {
+  border: none;
+}
+
+/* ============================================
+ * Typography / 文字类
+ * ============================================ */
+
+.ds-text-hero {
+  font-size: var(--fs-hero);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+  line-height: var(--lh-tight);
+  letter-spacing: -1rpx;
+}
+
+.ds-text-hero .accent {
+  color: var(--accent);
+}
+
+.ds-text-section {
+  font-size: var(--fs-section);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  line-height: var(--lh-normal);
+  letter-spacing: -0.4rpx;
+}
+
+.ds-text-card-title {
+  font-size: var(--fs-card-title);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  line-height: var(--lh-normal);
+  letter-spacing: -0.4rpx;
+}
+
+.ds-text-body {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  color: var(--text-secondary);
+  line-height: var(--lh-relaxed);
+}
+
+.ds-text-body strong {
+  color: var(--text-primary);
+  font-weight: var(--fw-semibold);
+}
+
+.ds-text-caption {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-regular);
+  color: var(--text-tertiary);
+  line-height: var(--lh-normal);
+}
+
+/* Section label - 大写小字标签,用在卡片组上方 */
+.ds-text-label {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  color: var(--text-tertiary);
+  letter-spacing: 2rpx;
+  text-transform: uppercase;
+  line-height: var(--lh-normal);
+}
+
+/* ============================================
+ * Layout helpers / 布局辅助
+ * ============================================ */
+
+/* Hero 区 - 页面顶部欢迎区 */
+.ds-hero {
+  padding: var(--sp-7) var(--sp-2) var(--sp-7);
+}
+
+.ds-hero .greeting {
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  margin-bottom: var(--sp-2);
+}
+
+/* Section - 一组同类内容的容器 */
+.ds-section {
+  margin-bottom: var(--sp-6);
+}
+
+.ds-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--sp-2);
+  margin-bottom: var(--sp-3);
+}
+
+/* 卡片列表的标准 gap */
+.ds-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+/* Page wrapper - 所有页面的根容器,提供安全的左右边距 */
+.ds-page {
+  padding: 0 var(--sp-5) var(--sp-8);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ============================================
+ * Switch / 开关
+ * ============================================ */
+
+.ds-switch {
+  width: 72rpx;
+  height: 44rpx;
+  background: var(--switch-off);
+  border-radius: var(--r-pill);
+  position: relative;
+  transition: background var(--duration-normal) var(--easing);
+}
+
+.ds-switch.is-on {
+  background: var(--accent);
+}
+
+.ds-switch::after {
+  content: '';
+  position: absolute;
+  top: 4rpx;
+  left: 4rpx;
+  width: 36rpx;
+  height: 36rpx;
+  background: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 2rpx 6rpx rgba(180, 120, 60, 0.15);
+  transition: transform var(--duration-normal) var(--easing);
+}
+
+.ds-switch.is-on::after {
+  transform: translateX(28rpx);
+}
+
+/* ============================================
+ * Divider / 分隔
+ * ============================================ */
+
+.ds-divider {
+  height: 1rpx;
+  background: var(--line);
+  margin: var(--sp-3) 0;
+}
+
+/* ============================================
+ * Icon container / 图标容器
+ * ============================================
+ * 用于包裹 SVG 图标,统一尺寸和颜色继承
+ */
+
+.ds-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32rpx;
+  height: 32rpx;
+  color: currentColor;
+}
+
+.ds-icon-sm {
+  width: 22rpx;
+  height: 22rpx;
+}
+
+.ds-icon-lg {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+/* 装饰性 icon 容器 - 带圆角软背景 */
+.ds-icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: var(--r-sm);
+  background: var(--bg-card-soft);
+  border: 1rpx solid var(--line);
+  color: var(--text-secondary);
+}

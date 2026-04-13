@@ -1,0 +1,216 @@
+# 小红花目标簿 · Cursor 项目规则
+
+> 这是项目级强制约束。每次对话自动注入。任何代码改动都必须遵守。
+> 详细的"为什么"在 DESIGN_SYSTEM.md。本文件只列"必须做什么 / 不能做什么"。
+
+---
+
+## 项目背景
+
+- 微信小程序原生开发（WXML + WXSS + JS），不使用 Tailwind / Vue / React
+- 设计系统位于 styles/tokens.wxss 和 styles/components.wxss
+- 设计意图与判断规则在 DESIGN_SYSTEM.md
+- 单位使用 rpx（小程序设计稿宽 750rpx，约 1px = 2rpx）
+
+---
+
+## 强制约束（Hard Rules）
+
+### R1 · 禁止 hardcode 视觉值
+
+所有颜色、阴影、间距、字号、圆角、字体必须引用 styles/tokens.wxss 中的 CSS 变量。
+
+❌ 反例：
+```css
+.card {
+  background: #FFFFFF;
+  padding: 32rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  color: #333;
+}
+```
+
+✅ 正例：
+```css
+.card {
+  background: var(--bg-card);
+  padding: var(--sp-4);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-card);
+  color: var(--text-primary);
+}
+```
+
+特殊情况：如果遇到 token 中没有的需求，**不要自己发明新值**。停下来告诉用户，让用户决定是新增 token 还是改用已有 token。
+
+### R2 · 阴影必须使用暖色调
+
+所有 box-shadow 严禁使用 rgba(0, 0, 0, ...)。必须：
+- 优先引用 `var(--shadow-sm)` / `var(--shadow-card)` / `var(--shadow-card-pressed)`
+- 如必须自定义阴影，色相必须是 rgba(180, 120, 60, ...) 或类似暖棕色
+
+❌ `box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);`
+✅ `box-shadow: var(--shadow-card);`
+
+### R3 · 强调色出现次数限制
+
+每一个 page 内，最饱和的强调色 `var(--accent)`（#E8632A）出现次数不得超过 2 处。
+
+判断方法：写完一个 page 的 wxss 后，搜索该文件中 `var(--accent)` 的出现次数（不含 `--accent-soft` 和 `--accent-deep`）。如果 ≥ 3，必须把次要的几处降级为 `var(--text-secondary)` 或 `var(--bg-card-soft)`。
+
+允许使用 `var(--accent)` 的元素（白名单）：
+- Hero 标题中的高亮关键词
+- 当前最活跃 streak 的 hot 徽章（含火苗图标）
+- 主卡片的"打卡"按钮文字
+- Tab bar 的当前选中项
+
+不允许使用 `var(--accent)` 的元素（黑名单）：
+- 所有开关 ON 状态以外的元素
+- 所有箭头图标
+- 所有边框
+- 所有标签条 / 装饰条
+- 次要功能（提醒、设置、帮助）的任何视觉元素
+
+### R4 · 优先使用已封装组件类
+
+任何卡片、徽章、按钮、文字必须优先使用 styles/components.wxss 中已有的 `.ds-*` 类。
+
+常用类（修改前请查阅 components.wxss 确认完整列表）：
+- `.ds-card` / `.ds-card-primary`
+- `.ds-badge` / `.ds-badge-hot`
+- `.ds-text-title` / `.ds-text-body` / `.ds-text-caption`
+
+只有当现有 `.ds-*` 类完全不满足需求时，才允许写新的 class。新 class 内部仍然必须只引用 var(--*) token。
+
+### R5 · 禁止使用 emoji 作为 UI 图标
+
+所有 UI 图标必须是 SVG line icon。严禁使用 emoji 字符（🌺 🔔 🏠 等）。
+
+要求：
+- 风格：line icon（描边，非填充）
+- 线宽：stroke-width="1.8"
+- 端点：stroke-linecap="round" stroke-linejoin="round"
+- 颜色：使用 currentColor，由父元素 color 控制
+- 来源：优先 Lucide Icons，其次 Tabler Icons
+
+如果需要新图标，**直接内嵌 SVG 到 wxml**，不要引入图标字体或第三方库。
+
+### R6 · 不允许 emoji 占位符
+
+写 mockup 或临时占位时，也不允许写 emoji。如果需要图标占位，使用空 SVG 或 `<view class="icon-placeholder" />`。
+
+### R7 · 间距必须使用 8 倍数 scale
+
+所有 padding / margin / gap 必须使用 `var(--sp-1)` 到 `var(--sp-8)` 之一。
+
+禁止：`padding: 26rpx;` `margin: 13rpx;` `gap: 19rpx;`
+允许：`padding: var(--sp-4);` `margin: var(--sp-3);` `gap: var(--sp-2);`
+
+如果某个场景非常需要非 scale 数值，先停下来想是不是别的地方设计错了。99% 的情况下答案是"是"。
+
+### R8 · 视觉中心唯一性
+
+每个 page 必须有且只有一个视觉中心。视觉中心必须是用户当前最重要的任务，不是产品方想推广的功能。
+
+写完一个 page 后自问：用户打开这一屏 0.5 秒内视线会落在哪？那个元素是不是当前最重要的任务？如果不是，调整视觉权重。
+
+具体技巧：
+- 视觉中心元素使用 `.ds-card-primary`（如果是卡片），其他用 `.ds-card`
+- 视觉中心元素允许使用 hot 徽章，其他卡片使用默认徽章
+- 一屏只允许 0 或 1 张 primary 卡片
+
+### R9 · Primary 按钮唯一性
+
+每个 page 最多只允许 1 个 Primary 按钮。如果出现两个，必须降级其中一个为 Secondary 或 Tertiary。
+
+### R10 · 不允许装饰性元素
+
+禁止以下"v1 时代"的元素出现在新代码中：
+- 卡片顶部的橙色渐变装饰条
+- 卡片左侧的彩色 indicator bar（除非是 .goal-note 那种语义化的 border-left）
+- 任何与功能无关的渐变线、彩色 dot、装饰性几何图形
+
+---
+
+## 修改流程（Workflow）
+
+### 修改任何 UI 之前
+
+1. 读 DESIGN_SYSTEM.md 中相关章节（至少读「一、设计哲学」和「四、交互权重规则」）
+2. 查 styles/tokens.wxss 看可用变量
+3. 查 styles/components.wxss 看可复用类
+
+### 修改完成之后
+
+逐条核对以下自检清单（必须真正核对，不允许"我都符合了"式的草率回答）：
+
+```
+□ R1 没有任何 hardcode 颜色 / 数值 / 字号
+□ R2 所有阴影使用暖色调（无 rgba(0,0,0,...)）
+□ R3 var(--accent) 出现次数 ≤ 2
+□ R4 优先复用了 .ds-* 类
+□ R5 没有 emoji 图标，全部 SVG
+□ R6 没有 emoji 占位
+□ R7 所有间距使用 sp scale
+□ R8 视觉中心明确且是用户最重要任务
+□ R9 最多 1 个 Primary 按钮
+□ R10 没有装饰性元素
+```
+
+如果任何一条不通过，返回去修改。不要把不合规的代码交付给用户。
+
+### 边缘情况处理
+
+如果遇到 DESIGN_SYSTEM.md 没有覆盖的场景：
+
+- ❌ 不要自己发明新规则
+- ❌ 不要"就这一次"破例
+- ✅ 停下来告诉用户，描述具体场景，提供 2–3 个备选方案让用户选
+- ✅ 用户决定后，把新规则更新到 DESIGN_SYSTEM.md
+
+---
+
+## 代码组织约定
+
+```
+项目根目录/
+├── DESIGN_SYSTEM.md          # 设计意图（这份文档的"为什么"）
+├── .cursorrules              # 本文件
+├── app.wxss                  # 全局样式入口，import tokens 和 components
+├── styles/
+│   ├── tokens.wxss           # 设计变量（颜色 / 阴影 / 间距等）
+│   └── components.wxss       # 通用 .ds-* 组件类
+├── pages/                    # 页面，每页一个文件夹
+│   └── index/
+│       ├── index.wxml
+│       ├── index.wxss
+│       ├── index.js
+│       └── index.json
+├── components/               # 自定义组件
+└── mockups/                  # 设计参考 HTML（不参与构建，仅供 AI 引用）
+```
+
+约定：
+- 不要在 styles/ 下新建文件，除非有充分理由并向用户说明
+- 不要修改 app.wxss 的 import 顺序（tokens 必须在 components 之前）
+- 不要在 page 级 wxss 中重新定义 token 变量
+
+---
+
+## 常见错误模式（AI 容易犯的）
+
+1. **"看起来差不多就行"**：随手写 `padding: 30rpx` 而不是 `var(--sp-4)`。这是最常见的违规。
+2. **"再加一处强调色不算多"**：每次"就这一处"累积起来就是全屏开花。严格执行 R3。
+3. **"emoji 更直观"**：在 mockup / 占位中偷偷用 emoji。R5 和 R6 没有例外。
+4. **"这个新场景需要新颜色"**：99% 的情况下，已有 token 够用。停下来想想是不是设计错了。
+5. **"我顺手优化一下其他地方"**：只改用户要求的部分。不要"顺手"重构其他文件，那会污染 git diff。
+6. **"reviewer 不会注意到"**：任何违反 R1–R10 的代码都不允许提交。即使用户没要求自检，AI 也必须自检。
+
+---
+
+## 与用户对话时
+
+- 改完代码后，主动列出："这次改动遵守了 R1–R10 中的哪几条""有没有哪一条接近边界需要用户确认"
+- 如果 DESIGN_SYSTEM.md 或 tokens.wxss 缺少某个东西，明确指出，建议用户增补
+- 不要默默忽略约束。如果某条约束无法满足，明说"R3 在这个页面无法做到 ≤ 2，因为...请用户决定"

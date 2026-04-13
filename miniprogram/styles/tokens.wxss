@@ -1,0 +1,135 @@
+/**
+ * 小红花目标簿 · Design Tokens
+ * ============================
+ * 所有视觉变量的唯一来源。任何颜色、阴影、间距、字号都必须从这里引用。
+ *
+ * 注意:
+ * 1. 小程序的 CSS 变量必须定义在 page 选择器上才能全局生效,
+ *    定义在 :root 或 * 上是无效的。
+ * 2. 单位使用 rpx (设计稿宽 750rpx, 约 1px = 2rpx)。
+ * 3. 修改任何 token 前请先读 DESIGN_SYSTEM.md 理解设计意图。
+ */
+
+page {
+  /* ============================================
+   * Colors / 颜色
+   * ============================================ */
+
+  /* 背景色 */
+  --bg-page: #F5EDE2;        /* 页面主背景 - warm beige */
+  --bg-card: #FFFFFF;         /* 主卡片背景 */
+  --bg-card-soft: #FBF6EE;    /* 次级卡片 / chip / 输入框背景 */
+
+  /* 文字色 (暖色调,非纯黑) */
+  --text-primary: #2A1F15;    /* 标题、重要文字 */
+  --text-secondary: #8B7355;  /* 正文、说明文字 */
+  --text-tertiary: #B8A48A;   /* 标签、placeholder */
+
+  /* 强调色 (使用必须严格克制 - 见 .cursorrules R3) */
+  --accent: #E8632A;          /* 唯一的主强调色,整屏 ≤ 2 处 */
+  --accent-soft: #FCE4D2;     /* 强调色低饱和版,用作 hot badge 底色 */
+  --accent-deep: #C44A15;     /* hover/pressed 状态 */
+
+  /* 辅助色 */
+  --line: rgba(139, 115, 85, 0.10);       /* hairline border, warm taupe */
+  --line-strong: rgba(139, 115, 85, 0.18); /* 需要更明显的分隔时使用 */
+  --switch-off: rgba(139, 115, 85, 0.20); /* 开关 OFF 状态 */
+
+  /* ============================================
+   * Elevation / 阴影 (质感核心)
+   * ============================================
+   * 铁律: 所有阴影必须使用暖色调 rgba(180, 120, 60, ...),
+   *      绝对禁止使用 rgba(0, 0, 0, ...)。
+   * 多层叠加模拟真实光照: near + mid + ambient。
+   */
+
+  --shadow-sm:
+    0 2rpx 4rpx rgba(180, 120, 60, 0.04),
+    0 4rpx 12rpx rgba(180, 120, 60, 0.03);
+
+  --shadow-card:
+    0 2rpx 4rpx rgba(180, 120, 60, 0.05),
+    0 8rpx 32rpx rgba(180, 120, 60, 0.06),
+    0 24rpx 64rpx rgba(180, 120, 60, 0.04);
+
+  --shadow-card-pressed:
+    0 2rpx 6rpx rgba(180, 120, 60, 0.08);
+
+  --shadow-accent:
+    0 8rpx 28rpx rgba(232, 99, 42, 0.25),
+    0 2rpx 6rpx rgba(232, 99, 42, 0.15);
+
+  /* ============================================
+   * Spacing / 间距 (8 倍数 scale)
+   * ============================================
+   * 铁律: 任何 padding/margin/gap 必须使用以下 token 之一,
+   *      禁止 13rpx、19rpx、26rpx 等非 scale 数值。
+   */
+
+  --sp-1: 8rpx;    /* 4px - icon 与文字微距 */
+  --sp-2: 16rpx;   /* 8px - 紧密元素间距 */
+  --sp-3: 24rpx;   /* 12px - 卡片内段落间距 */
+  --sp-4: 32rpx;   /* 16px - 卡片内 padding 标准值 */
+  --sp-5: 40rpx;   /* 20px - 卡片间距 / 加大 padding */
+  --sp-6: 48rpx;   /* 24px - section 间距 */
+  --sp-7: 64rpx;   /* 32px - hero 区上下留白 */
+  --sp-8: 80rpx;   /* 40px - 大段视觉分隔 */
+
+  /* ============================================
+   * Radius / 圆角
+   * ============================================ */
+
+  --r-sm: 20rpx;     /* 10px - 小元素 chip / 输入框 */
+  --r-md: 32rpx;     /* 16px - 卡片标准圆角 (最常用) */
+  --r-lg: 40rpx;     /* 20px - 大型容器 / 模态层 */
+  --r-pill: 9999rpx; /* 完全圆角 - 徽章 / pill */
+
+  /* ============================================
+   * Typography / 字体
+   * ============================================
+   * 注意: 微信小程序无法直接加载 Google Fonts,
+   *      Noto Sans SC 需要在 app.json 的 fonts 配置中声明,
+   *      或退化到系统字体 (中文环境下系统默认已经是合理的无衬线)。
+   */
+
+  --font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont,
+                 'PingFang SC', 'Helvetica Neue', sans-serif;
+
+  /* Type scale - 配套使用 font-size + font-weight + line-height */
+  --fs-hero: 52rpx;       /* Hero 大标题 */
+  --fs-section: 34rpx;    /* Section 标题 */
+  --fs-card-title: 32rpx; /* 卡片标题 */
+  --fs-body: 26rpx;       /* 正文 body */
+  --fs-caption: 22rpx;    /* Caption / label */
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  --lh-tight: 1.25;       /* 标题行高 */
+  --lh-normal: 1.4;       /* 卡片标题、caption */
+  --lh-relaxed: 1.5;      /* 正文 */
+
+  /* ============================================
+   * Motion / 动效
+   * ============================================ */
+
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+  --easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ============================================
+   * 全局 page 样式 (背景 + 字体)
+   * ============================================ */
+
+  background:
+    radial-gradient(ellipse at top, #FAF2E5 0%, #F5EDE2 40%, #EFE5D6 100%);
+  background-color: var(--bg-page); /* fallback */
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: var(--fs-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
